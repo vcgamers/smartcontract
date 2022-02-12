@@ -263,8 +263,14 @@ contract VCG is
   uint256 public _tax = 6;
   uint256 public _taxDivider = 100;
   address public _taxCollector;
-  function setTax(uint256 input_) public onlyOwner { _tax = input_; }
-  function setTaxDivider(uint256 input_) public onlyOwner { _taxDivider = input_; }
+  function setTax(uint256 input_) public onlyOwner { 
+    require(input_ <= 90, "Too high tax."); //arbitrary values, please modify
+    _tax = input_; 
+  }
+  function setTaxDivider(uint256 input_) public onlyOwner { 
+    require(input_ <= 200, "Too high taxDivider."); //arbitrary values, please modify
+    _taxDivider = input_;
+  }
   function setTaxCollector(address input_) public onlyOwner { 
     require(input_ != address(0), "Zero Address."); 
     _taxCollector = input_; 
